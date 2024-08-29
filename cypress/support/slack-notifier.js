@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Make sure the path to your mochawesome report is correct
-const reportPath = path.resolve('/Users/Suraj/P99soft-Slack/mochawesome-report/mochawesome.json');
+const reportPath = path.resolve('/Users/Suraj/P99soft-Slack/mochawesome-report/mochawesome_001.json');
 const webhookUrl = 'https://hooks.slack.com/services/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'; // Your Slack webhook URL
 
 // Function to parse test results

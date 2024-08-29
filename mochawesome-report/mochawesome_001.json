@@ -1,0 +1,277 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 9,
+    "passes": 4,
+    "pending": 0,
+    "failures": 5,
+    "start": "2024-08-29T11:24:56.906Z",
+    "end": "2024-08-29T11:25:57.201Z",
+    "duration": 60295,
+    "testsRegistered": 9,
+    "passPercent": 44.44444444444444,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4d4034d6-0e8e-4db8-89c4-f1a09eaac732",
+      "title": "",
+      "fullFile": "cypress\\e2e\\P99soft_Page.cy.js",
+      "file": "cypress\\e2e\\P99soft_Page.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+          "title": "P99Soft Automation Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should load the homepage and verify basic elements",
+              "fullTitle": "P99Soft Automation Tests should load the homepage and verify basic elements",
+              "timedOut": null,
+              "duration": 9506,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.contains('Your IT Challenges, Our Expert Solutions');",
+              "err": {},
+              "uuid": "d0434f22-d2f5-47e3-8cb0-e6ec7081082b",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the logo inside the header is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the logo inside the header is visible",
+              "timedOut": null,
+              "duration": 2068,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.get(\"img[alt='logo']\").should('be.visible').and('have.attr', 'alt', 'logo');",
+              "err": {},
+              "uuid": "ac517a9e-4291-4556-a931-b304d3ed567f",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the service tab on the header is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the service tab on the header is visible",
+              "timedOut": null,
+              "duration": 1611,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.xpath('(//a[@class=\"elementor-item\"])').should('be.visible');",
+              "err": {},
+              "uuid": "dd69fca3-c7fd-4960-a4bc-7574d98c18a2",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the company tab is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the company tab is visible",
+              "timedOut": null,
+              "duration": 6289,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.xpath('//a[@id=\"sm-1724310930254137-3\"]').first().should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `//a[@id=\"sm-1724310930254137-3\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `//a[@id=\"sm-1724310930254137-3\"]`, but never found it.\n    at Context.eval (webpack://p99soft-slack/./cypress/e2e/P99soft_Page.cy.js:39:7)",
+                "diff": null
+              },
+              "uuid": "706e136d-f9a1-4f73-986c-e82c5ccfa40f",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the Case Studies tab is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the Case Studies tab is visible",
+              "timedOut": null,
+              "duration": 6476,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.xpath('(//a[@class=\"elementor-item\"])[26]').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<a.elementor-item>' to be 'visible'\n\nThis element `<a.elementor-item>` is not visible because it is hidden by transform.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<a.elementor-item>' to be 'visible'\n\nThis element `<a.elementor-item>` is not visible because it is hidden by transform.\n    at Context.eval (webpack://p99soft-slack/./cypress/e2e/P99soft_Page.cy.js:48:7)",
+                "diff": null
+              },
+              "uuid": "ce64df52-3c06-4303-b0e8-42108dd8914b",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the Blog tab is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the Blog tab is visible",
+              "timedOut": null,
+              "duration": 6590,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.xpath('(//a[@class=\"elementor-item\"])[27]').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<a.elementor-item>' to be 'visible'\n\nThis element `<a.elementor-item>` is not visible because it is hidden by transform.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<a.elementor-item>' to be 'visible'\n\nThis element `<a.elementor-item>` is not visible because it is hidden by transform.\n    at Context.eval (webpack://p99soft-slack/./cypress/e2e/P99soft_Page.cy.js:55:7)",
+                "diff": null
+              },
+              "uuid": "6471b675-5ea7-4965-a7ba-4b423aa3bea1",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the Resources tab is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the Resources tab is visible",
+              "timedOut": null,
+              "duration": 12812,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\n//cy.xpath('(//a[@id=\"sm-17242165347422874-5\"])[1]')\ncy.xpath('(//a[contains(@class, \"elementor-item\") and contains(@class, \"elementor-item-anchor\") and contains(@class, \"has-submenu\") and contains(@class, \"highlighted\") and @aria-haspopup=\"true\" and @aria-expanded=\"true\"])', {\n  timeout: 10000\n}) // Increase timeout to 10 seconds\n.should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `(//a[contains(@class, \"elementor-item\") and contains(@class, \"elementor-item-anchor\") and contains(@class, \"has-submenu\") and contains(@class, \"highlighted\") and @aria-haspopup=\"true\" and @aria-expanded=\"true\"])`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `(//a[contains(@class, \"elementor-item\") and contains(@class, \"elementor-item-anchor\") and contains(@class, \"has-submenu\") and contains(@class, \"highlighted\") and @aria-haspopup=\"true\" and @aria-expanded=\"true\"])`, but never found it.\n    at Context.eval (webpack://p99soft-slack/./cypress/e2e/P99soft_Page.cy.js:63:3)",
+                "diff": null
+              },
+              "uuid": "0960f10b-a5c0-4d6f-8b4f-9bc7cc082162",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the Careers tab is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the Careers tab is visible",
+              "timedOut": null,
+              "duration": 6974,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.xpath('(//a[@class=\"elementor-item elementor-item-active\"])[6]').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<a.elementor-item.elementor-item-active>' to be 'visible'\n\nThis element `<a.elementor-item.elementor-item-active>` is not visible because it is hidden by transform.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<a.elementor-item.elementor-item-active>' to be 'visible'\n\nThis element `<a.elementor-item.elementor-item-active>` is not visible because it is hidden by transform.\n    at Context.eval (webpack://p99soft-slack/./cypress/e2e/P99soft_Page.cy.js:71:7)",
+                "diff": null
+              },
+              "uuid": "c97d040d-a13c-446b-89a4-cfc081aa2c1c",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify that the Contact tab is visible",
+              "fullTitle": "P99Soft Automation Tests should verify that the Contact tab is visible",
+              "timedOut": null,
+              "duration": 1451,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.p99soft.com');\ncy.xpath('(//span[@class=\"elementor-button-text\"])[3]').should('be.visible');",
+              "err": {},
+              "uuid": "25e640d2-4e1d-4de6-b6b9-0551f34b32e3",
+              "parentUUID": "8c022376-9ecc-46ab-82e6-46fc0a356c3e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d0434f22-d2f5-47e3-8cb0-e6ec7081082b",
+            "ac517a9e-4291-4556-a931-b304d3ed567f",
+            "dd69fca3-c7fd-4960-a4bc-7574d98c18a2",
+            "25e640d2-4e1d-4de6-b6b9-0551f34b32e3"
+          ],
+          "failures": [
+            "706e136d-f9a1-4f73-986c-e82c5ccfa40f",
+            "ce64df52-3c06-4303-b0e8-42108dd8914b",
+            "6471b675-5ea7-4965-a7ba-4b423aa3bea1",
+            "0960f10b-a5c0-4d6f-8b4f-9bc7cc082162",
+            "c97d040d-a13c-446b-89a4-cfc081aa2c1c"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 53777,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "json": true,
+        "overwrite": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}
