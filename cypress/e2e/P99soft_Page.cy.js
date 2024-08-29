@@ -40,7 +40,7 @@ describe('P99Soft Automation Tests', () => {
 
   });
 
-  // Case Studies tab
+ 
   it('should verify that the Case Studies tab is visible', () => {
     cy.visit('https://www.p99soft.com');
     cy.xpath('(//a[@class="elementor-item"])[26]')
