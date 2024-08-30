@@ -4,81 +4,87 @@ require('cypress-xpath');
 
 describe('P99Soft Automation Tests', () => {
 
-  // before(() => {
-  //    cy.task('Slack_Notify',{message: 'Starting tests for P99Soft website...'});
-  //  });
-
-  // afterEach(function () {
-  //   const status = this.currentTest.state;
-  //   const message = `Test ${this.currentTest.title} ${status === 'passed' ? 'passed' : 'failed'}`;
-  //   cy.task('Slack_Notify', { message });
-  // });
-
-  it('should load the homepage and verify basic elements', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.contains('Your IT Challenges, Our Expert Solutions'); 
-  });
-
-  it('should verify that the logo inside the header is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.get("img[alt='logo']")
+    it('should load the homepage and verify basic elements', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.contains('Your IT Challenges, Our Expert Solutions'); 
+   });
+   
+    it('should verify that the path element is visible', () => {    
+      cy.visit('https://www.p99soft.com'); 
+      cy.xpath('(//*[name()="path"])[12]')
+        .should('be.visible');
+   });
+ 
+    it('should verify that the logo inside the header is visible', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.get("img[alt='logo']")
       .should('be.visible')
       .and('have.attr', 'alt', 'logo');
-  });
+   });
 
-  // Services tab
-  it('should verify that the service tab on the header is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.xpath('(//a[@class="elementor-item"])')
-      .should('be.visible');
-  });
+      // Services tab
+    it('should verify that the service tab on the header is visible', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.xpath('(//a[@class="elementor-item"])')
+        .should('be.visible');
+   });
 
-  // Company tab
-  it('should verify that the company tab is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.xpath('//a[@id="sm-1724310930254137-3"]').first()
-    .should('be.visible');
+      // Company tab
+    it('should verify that the company tab is visible', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.xpath('/html[1]/body[1]/div[6]/section[3]/div[1]/div[2]/div[1]/div[2]/div[1]/nav[2]/ul[1]/li[3]/a[1]')
+        .should('be.visible');
+   });
+      // Case Studies tab
+    it('should verify that the Case Studies tab is visible', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.xpath('//a[@href="https://p99soft.com/case-studies/"]')
+        .should('be.visible');
+   });
 
-  });
+     // Blog tab
+    it('should verify that the Blog tab is visible', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.xpath('//a[@href="https://p99soft.com/blog/"]')
+        .should('be.visible');
+   });
 
-  // Case Studies tab
-  it('should verify that the Case Studies tab is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.xpath('(//a[@class="elementor-item"])[26]')
-      .should('be.visible');
-  });
-
-  // Blog tab
-  it('should verify that the Blog tab is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.xpath('(//a[@class="elementor-item"])[27]')
-      .should('be.visible');
-  });
-
-  // Resources tab
-  it('should verify that the Resources tab is visible', () => {
-    cy.visit('https://www.p99soft.com');
+     // Resources tab
+    it('should verify that the Resources tab is visible', () => {
+      cy.visit('https://www.p99soft.com');
     //cy.xpath('(//a[@id="sm-17242165347422874-5"])[1]')
-    cy.xpath('(//a[contains(@class, "elementor-item") and contains(@class, "elementor-item-anchor") and contains(@class, "has-submenu") and contains(@class, "highlighted") and @aria-haspopup="true" and @aria-expanded="true"])', { timeout: 10000 }) // Increase timeout to 10 seconds
-  .should('be.visible');
+      cy.xpath('/html[1]/body[1]/div[6]/section[3]/div[1]/div[2]/div[1]/div[2]/div[1]/nav[2]/ul[1]/li[6]/a[1]')
+        .should('be.visible');
+   });
 
-  });
+      // Careers tab
+    it('should verify that the Careers tab is visible', () => {
+      cy.visit('https://www.p99soft.com');
 
-  // Careers tab
-  it('should verify that the Careers tab is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.xpath('(//a[@class="elementor-item elementor-item-active"])[6]')
-      .should('be.visible');
-  });
+      cy.xpath('//a[contains(text(), "Careers")]')
+        .should('be.visible')
+        .then((element) => {
+      console.log(element.text());
+   });
+   })
+      // Contact tab
+    it('should verify that the Contact tab is visible', () => {
+      cy.visit('https://www.p99soft.com');
+      cy.xpath('(//span[@class="elementor-button-text"])[3]')
+        .should('be.visible');
+   });
+      // client support
+    it('should verify that the client support tab is visible', () => {
+      cy.visit('https://www.p99soft.com'); 
+      cy.xpath('')
+        .should('be.visible')
+        .then((element) => {
+      console.log('Client Support tab text:', element.text());
+      
+   })
+   })
+   })
 
-  // Contact tab
-  it('should verify that the Contact tab is visible', () => {
-    cy.visit('https://www.p99soft.com');
-    cy.xpath('(//span[@class="elementor-button-text"])[3]')
-      .should('be.visible');
-  });
-
-});
 //       after(() => {
 //       cy.task('Slack_Notify', 'Tests for P99Soft website completed.');
 //       sendSlackNotification(message);
@@ -94,21 +100,12 @@ describe('P99Soft Automation Tests', () => {
   //    // Verify the URL includes '/contact'
   //    cy.url().should('include', '/contact');
 
-  //    // Verify the presence of form elements
-  //    cy.get('input[name="name"]').should('be.visible');
-  //    cy.get('input[name="email"]').should('be.visible');
-  //    cy.get('textarea[name="message"]').should('be.visible');
-  //    cy.get('button[type="submit"]').should('be.visible');
-  //  });
-
   //  it('should submit the contact form successfully', () => {
   //    // Fill out the contact form
   //    cy.get('input[name="name"]').type('Suraj');
   //    cy.get('input[name="email"]').type('suraj.gagare@example.com');
   //    cy.get('textarea[name="message"]').type('Hello');
-    
-  //    // Submit the form
-  //    cy.get('button[type="submit"]').click();
+  
     
   //    // Verify that a success message or confirmation appears
   //    cy.get('.success-message').should('contain.text', 'Thank you for your message!');
