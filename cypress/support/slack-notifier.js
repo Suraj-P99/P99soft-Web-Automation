@@ -1,9 +1,10 @@
 const axios = require('axios');
 const fs = require('fs');
-const path = require('path');
+require('dotenv').config();
 
 
-const reportPath = path.resolve('/Users/Suraj/P99soft-Slack/mochawesome-report/mochawesome_001.json');
+const reportPath =  './mochawesome-report/mochawesome_001.json';
+const reporthtml = './mochawesome-report/mochawesome_001.html';
 const webhookUrl = process.env.SLACK_WEBHOOK_URL; 
 
 
@@ -57,10 +58,55 @@ function parseTestResults(filePath) {
 }
 
 
-async function sendSlackNotification(message) {
+async function sendSlackNotification(message,testReport) {
   try {
+    // const payload = {
+    //   text: message
+    // };
+
     const payload = {
-      text: message
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*Test Report*"
+          }
+        },
+        {
+          type: "divider"
+        },
+        {
+          type: "section",
+          fields: [
+            {
+              type: "mrkdwn",
+              text: `*Total Tests:*\n${testReport.totalTests}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*Duration:*\n${testReport.duration} ms`
+            }
+          ]
+        },
+        {
+          type: "section",
+          fields: [
+            {
+              type: "mrkdwn",
+              text: `*Passed:*\n:white_check_mark: ${testReport.passed}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*Failed:*\n:x: ${testReport.failed}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*Pending:*\n:hourglass_flowing_sand: ${testReport.pending}`
+            },
+          ]
+        }
+      ]
     };
     await axios.post(webhookUrl, payload, {
       headers: {
@@ -97,13 +143,13 @@ async function main() {
     console.log(`Duration: ${results.duration} ms`);
 
     const message = `Test Report:\nTotal Tests: ${results.totalTests}\nPassed: ${results.passed}\nFailed: ${results.failed}\nPending: ${results.pending}\nDuration: ${results.duration} ms`;
-    await sendSlackNotification(message);
+    await sendSlackNotification(message,results);
   } catch (error) {
     console.error('Error during main execution:', error.message);
   }
 }
 
-main();
+exports.main = main;
 
 
 

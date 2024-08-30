@@ -1,4 +1,5 @@
+const slackNotifier = require('./cypress/support/slack-notifier');
 async function sendSlackNotification() {
- console.log("Notified")   
+    slackNotifier.main()
 }
 sendSlackNotification()
