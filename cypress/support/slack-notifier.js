@@ -1,5 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
+const cheerio = require('cheerio');
 require('dotenv').config();
 
 
@@ -18,7 +19,35 @@ function isFileReady(filePath) {
     return false;
   }
 }
-function parseTestResults(filePath) {
+
+async function parseHtmlReport(filePath = reportHtmlPath) {
+  try {
+    const htmlContent = fs.readFileSync(filePath, 'utf8');
+    const $ = cheerio.load(htmlContent);
+    const testCases = [];
+
+    const rawData = $('body').attr('data-raw');
+    const reportData = JSON.parse(rawData);
+
+    reportData.results.forEach(result => {
+      result.suites.forEach(suite => {
+        suite.tests.forEach(test => {
+          testCases.push({
+            name: test.title, // Use the 'title' property to get only the test title
+            status: test.state
+          });
+        });
+      });
+    });
+
+    return testCases;
+  } catch (error) {
+    console.error(`Error reading or parsing HTML file ${filePath}:`, error.message);
+    return [];
+  }
+}
+
+async function parseTestResults(filePath) {
   try {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
@@ -58,11 +87,19 @@ function parseTestResults(filePath) {
 }
 
 
-async function sendSlackNotification(message,testReport) {
+async function sendSlackNotification(message,testReport,testCases) {
   try {
     // const payload = {
     //   text: message
     // };
+//${testCase.status.charAt(0).toUpperCase() + testCase.status.slice(1)}
+    const testCaseBlocks = testCases.map(testCase => ({
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `${testCase.status === 'passed' ? ':white_check_mark:' : testCase.status === 'failed' ? ':x:': ':hourglass_flowing_sand:'} ${testCase.status === 'failed' ? `*${testCase.name}*` : testCase.name}`
+      }
+    }));
 
     const payload = {
       blocks: [
@@ -105,7 +142,11 @@ async function sendSlackNotification(message,testReport) {
               text: `*Pending:*\n:hourglass_flowing_sand: ${testReport.pending}`
             },
           ]
-        }
+        },  
+        {
+          type: "divider"
+        },
+        ...testCaseBlocks
       ]
     };
     await axios.post(webhookUrl, payload, {
@@ -135,7 +176,8 @@ async function main() {
       return;
     }
 
-    const results = parseTestResults(reportPath);
+    const results = await parseTestResults(reportPath);
+    const testCases = await parseHtmlReport(reporthtml);
     console.log(`Total Tests: ${results.totalTests}`);
     console.log(`Passed: ${results.passed}`);
     console.log(`Failed: ${results.failed}`);
@@ -143,7 +185,7 @@ async function main() {
     console.log(`Duration: ${results.duration} ms`);
 
     const message = `Test Report:\nTotal Tests: ${results.totalTests}\nPassed: ${results.passed}\nFailed: ${results.failed}\nPending: ${results.pending}\nDuration: ${results.duration} ms`;
-    await sendSlackNotification(message,results);
+    await sendSlackNotification(message,results,testCases);
   } catch (error) {
     console.error('Error during main execution:', error.message);
   }
