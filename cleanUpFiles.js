@@ -1,20 +1,31 @@
 const fs = require('fs');
+const path = require('path');
 
-const reportJson = './mochawesome-report/mochawesome_001.json';
-const reporthtml = './mochawesome-report/mochawesome_001.html';
+const directory = './mochawesome-report';
 
-fs.unlink(reportJson, (err) => {
-  if (err) {
-    console.log(`Error deleting file: ${err.message}`);
-  } else {
-    console.log('File deleted successfully');
-  }
-});
-
-fs.unlink(reporthtml, (err) => {
+// Function to delete files with specific extensions
+const deleteFiles = (dir, extensions) => {
+  fs.readdir(dir, (err, files) => {
     if (err) {
-      console.log(`Error deleting file: ${err.message}`);
-    } else {
-      console.log('File deleted successfully');
+      console.log(`Error reading directory: ${err}`);
+      return;
     }
+
+    files.forEach(file => {
+      const ext = path.extname(file);
+      if (extensions.includes(ext)) {
+        const filePath = path.join(dir, file);
+        fs.unlink(filePath, err => {
+          if (err) {
+            console.log(`Error deleting file ${file}: ${err}`);
+            return;
+          }
+          console.log(`Deleted file: ${file}`);
+        });
+      }
+    });
   });
+};
+
+// Delete all .json and .html files in the specified directory
+deleteFiles(directory, ['.json', '.html']);
