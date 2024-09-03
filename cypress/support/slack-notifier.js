@@ -7,7 +7,7 @@ require('dotenv').config();
 const reportPath =  './mochawesome-report/mochawesome_001.json';
 const reporthtml = './mochawesome-report/mochawesome_001.html';
 const webhookUrl = process.env.SLACK_WEBHOOK_URL; 
-
+console.log(process.env.SLACK_WEBHOOK_URL,"url")
 
 function isFileReady(filePath) {
  console.log(process.env.SLACK_WEBHOOK_URL,"url")  //
